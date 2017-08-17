@@ -50,17 +50,10 @@ class Solution(object):
                 i_left = i + 1
             else:
                 inf = float('inf')
-                max_of_left = max(
-                    nums1[i-1] if i > 0 else -inf,
-                    nums2[j-1] if j > 0 else -inf
-                )
+                max_of_left = max(nums1[i-1] if i > 0 else -inf, nums2[j-1] if j > 0 else -inf)
                 if (m + n) % 2 == 1:
                     return max_of_left
-
-                min_of_right = min(
-                    nums1[i] if i < m else inf,
-                    nums2[j] if j < n else inf
-                )
+                min_of_right = min(nums1[i] if i < m else inf, nums2[j] if j < n else inf)
                 return float(max_of_left + min_of_right) / 2
 
 
