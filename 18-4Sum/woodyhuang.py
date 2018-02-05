@@ -1,44 +1,49 @@
-# https://leetcode.com/problems/3sum/description/
+# https://leetcode.com/problems/4sum/description/
 
 import unittest
-import time
 
 
 class Solution(object):
-    def threeSum(self, nums):
+
+    def fourSum(self, nums, target):
         n = len(nums)
-        if n < 3:
+        if n < 4:
             return []
         res = []
         nums.sort()
-        for i in range(n - 2):
-            if nums[i] > 0:
-                break
+        for i in range(n - 3):
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
-            j = i + 1
-            k = n - 1
-            s = - nums[i]
-            while j < k:
-                if nums[j] + nums[k] == s:
-                    res.append([nums[i], nums[j], nums[k]])
-                    while j < k and nums[j] == nums[j + 1]:
-                        j += 1
-                    while j < k and nums[k] == nums[k - 1]:
-                        k -= 1
-                    j += 1
-                    k -= 1
-                elif nums[j] + nums[k] < s:
-                    j += 1
-                else:
-                    k -= 1
+            for j in range(i + 1, n - 2):
+                if j > i + 1 and nums[j] == nums[j - 1]:
+                    continue
+                k = j + 1
+                l = n - 1
+                s = target - nums[i] - nums[j]
+
+                while k < l:
+                    if nums[k] + nums[l] == s:
+                        res.append([nums[i], nums[j], nums[k], nums[l]])
+                        # print len(res), res[-1], sum(res[-1])
+                        while k < l and nums[k] == nums[k + 1]:
+                            k += 1
+                        while k < l and nums[l] == nums[l - 1]:
+                            l -= 1
+                        k += 1
+                        l -= 1
+                    elif nums[k] + nums[l] < s:
+                        k += 1
+                    else:
+                        l -= 1
         return res
 
 
 class TestSolution(unittest.TestCase):
+
     def test_solution(self):
         s = Solution()
-        res = s.threeSum([
+        # res = s.fourSum([1, 0, -1, 0, -2, 2], 0)
+        data = [
             82597, -9243, 62390, 83030, -97960, -26521, -61011, 83390, -38677,
             12333, 75987, 46091, 83794, 19355, -71037, -6242, -28801, 324, 1202, -90885, -2989, -95597,
             -34333, 35528, 5680, 89093, -90606, 50360, -29393, -27012, 53313, 65213, 99818, -82405,
@@ -282,8 +287,9 @@ class TestSolution(unittest.TestCase):
             -67949, -38077, -38987, -32847, 51443, -53580, -13505, 9344, -92337, 26585, 70458, -52764,
             -67471, -68411, -1119, -2072, -93476, 67981, 40887, -89304, -12235, 41488, 1454, 5355, -34855,
             -72080, 24514, -58305, 3340, 34331, 8731, 77451, -64983, -57876, 82874, 62481, -32754, -39902,
-            22451, -79095, -23904, 78409, -7418, 77916])
-        print res
+            22451, -79095, -23904, 78409, -7418, 77916]
+        res = s.fourSum([0, 0, 0, 0], 0)
+        # print res
 
 
 if __name__ == '__main__':
