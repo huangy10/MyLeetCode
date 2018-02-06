@@ -29,6 +29,7 @@ class Solution(object):
         :type lists: List[ListNode]
         :rtype: ListNode
         """
+        lists = filter(lambda x: x is not None, lists)
         tail = ListNode(None)
         res = tail
         while len(lists) > 0:
